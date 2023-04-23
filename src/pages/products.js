@@ -1,9 +1,9 @@
 import Layout from "../../components/Layout";
 
-export default function Home() {
+export default function Products() {
   return(
     <Layout>
-    Home DashBoard
+    Products Page here
     </Layout>  
   )
 }
