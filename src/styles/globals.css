@@ -2,3 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+input, textarea{
+    @apply border-2 border-gray-400 rounded-md px-1 w-full;
+    @apply mb-2;
+    @apply font-extralight;
+}
+input:focus, textarea:focus{
+    @apply border-emerald-700;
+}
+h2{
+    @apply text-emerald-800 mb-4 text-center text-lg font-mono
+}
+label{
+    @apply font-mono;
+    @apply text-cyan-700;
+}
+.btn-primary{
+    @apply bg-cyan-800 text-white px-4 py-1 rounded-md;
+}
