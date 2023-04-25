@@ -20,3 +20,18 @@ label{
 .btn-primary{
     @apply bg-cyan-800 text-white px-4 py-1 rounded-md;
 }
+
+table.basic {
+    @apply w-full mt-4;
+}
+
+table.basic thead tr td {
+    @apply bg-slate-500 text-center text-white;
+}
+
+table.basic tr td {
+    @apply border-2 bg-slate-100 border-cyan-700 p-2;
+}
+table.basic a {
+    @apply bg-green-500 opacity-90 text-white text-sm rounded-md py-1 px-2 inline-flex;
+}
