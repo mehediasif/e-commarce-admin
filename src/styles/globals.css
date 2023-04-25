@@ -11,7 +11,10 @@ input:focus, textarea:focus{
     @apply border-emerald-700;
 }
 h2{
-    @apply text-emerald-800 mb-4 text-center text-lg font-mono
+    @apply text-emerald-800 mb-4 text-center text-lg font-mono;
+}
+h3{
+    @apply text-orange-600 mb-2 text-center text-base font-medium;
 }
 label{
     @apply font-mono;
@@ -19,6 +22,9 @@ label{
 }
 .btn-primary{
     @apply bg-cyan-800 text-white px-4 py-1 rounded-md;
+}
+.btn-secondary{
+    @apply bg-red-500 text-white px-4 py-1 mr-2 rounded-md;
 }
 
 table.basic {
