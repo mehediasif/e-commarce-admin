@@ -33,5 +33,5 @@ table.basic tr td {
     @apply border-2 bg-slate-200 border-cyan-700 p-2;
 }
 table.basic a {
-    @apply bg-green-500 opacity-90 text-white text-sm rounded-md py-1 px-2 inline-flex gap-1;
+    @apply bg-green-500 opacity-90 text-white text-sm rounded-md py-1 px-2 inline-flex gap-1 mr-1;
 }

@@ -35,6 +35,12 @@ export default function Products() {
 
                 Edit
                 </Link>
+                <Link href={'/products/edit/'+p._id}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 bg-red-400 border-slate-700">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Delete
+                </Link>
               </td>
             </tr>
           ))}
