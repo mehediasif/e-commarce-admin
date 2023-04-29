@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Categories(){
+    const [editingCategory, setEditingCategory] = useState(null);
     const [name,setName] = useState('');
     const [categoryName,setcategoryName] = useState([]);
     const [parentCategoryName,setParentCategoryName] = useState('');
@@ -19,14 +20,28 @@ export default function Categories(){
 
     async function saveCategory(ev){
         ev.preventDefault();
-        await axios.post('/api/categories', {name,parentCategoryName});
+        const data = {name,parentCategoryName}
+        if(editingCategory){
+            data._id = editingCategory._id;
+            await axios.put('/api/categories', data);
+            setEditingCategory(null);
+        }else{
+            await axios.post('/api/categories', data);
+        }
         setName('');
         fetchCategories();
+    }
+    function editCategory(category){
+        setEditingCategory(category);
+        setName(category.name);
+        setParentCategoryName(category.parent?._id);
     }
     return (
         <Layout>
             <h2>Categories</h2>
-            <label>Save New Category</label>
+            <label>
+                {editingCategory ? `Editing Category '${editingCategory.name}'` : 'Create new category'}
+            </label>
             <form onSubmit={saveCategory} className="flex gap-1">
                 <input 
                     className="mb-0"
@@ -39,7 +54,7 @@ export default function Categories(){
                 onChange={ev => setParentCategoryName(ev.target.value)}
                 value={parentCategoryName}
                 >
-                    <option value={0}>No Parent Category</option>
+                    <option value=''>No Parent Category</option>
                     {categoryName.length > 0 && categoryName.map(category => (
                     // eslint-disable-next-line react/jsx-key
                         <option value={category._id}>{category.name}</option>
@@ -63,7 +78,10 @@ export default function Categories(){
                         <td>{category.name}</td>
                         <td>{category?.parent?.name}</td>
                         <td>
-                            <button className="btn-primary mr-1">Edit</button>
+                            <button 
+                            onClick={() => editCategory(category)}
+                            className="btn-primary mr-1"                            
+                            >Edit</button>
                             <button className="btn-secondary">Delete</button>
                         </td>
                     </tr>
