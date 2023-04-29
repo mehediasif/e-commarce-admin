@@ -6,12 +6,12 @@ img{
     max-height: 100%;
     border-radius: 0.5rem;
 }
-input, textarea{
+input, textarea, select{
     @apply border-2 border-gray-400 rounded-md px-1 w-full;
     @apply mb-2;
     @apply font-extralight;
 }
-input:focus, textarea:focus{
+input:focus, textarea:focus, select:focus{
     @apply border-emerald-700;
 }
 h2{
@@ -32,7 +32,7 @@ label{
 }
 
 table.basic {
-    @apply w-3/4 mt-4;
+    @apply w-full mt-4;
 }
 
 table.basic thead tr td {
