@@ -1,8 +1,10 @@
 import Layout from "../../components/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import React from 'react';
+import { withSwal } from 'react-sweetalert2';
 
-export default function Categories(){
+function Categories({swal}){
     const [editingCategory, setEditingCategory] = useState(null);
     const [name,setName] = useState('');
     const [categoryName,setcategoryName] = useState([]);
@@ -35,6 +37,30 @@ export default function Categories(){
         setEditingCategory(category);
         setName(category.name);
         setParentCategoryName(category.parent?._id);
+    }
+
+    function deleteCategory(category){
+        swal.fire({
+            title: "Are you Sure?",
+            text: `Do you want to delete ${category.name}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete!',
+            confirmButtonColor: '#d56',
+            reverseButtons: true,
+        }).then(async result => {
+            if(result.isConfirmed) {
+                const {_id} = category;
+                await axios.delete('/api/categories?_id='+_id);
+                fetchCategories();
+                swal.fire({
+                    title: 'Deleted!',
+                    text: `${category.name} Category has been deleted!`,
+                    icon: 'success',
+                });
+            }
+        });
     }
     return (
         <Layout>
@@ -82,7 +108,9 @@ export default function Categories(){
                             onClick={() => editCategory(category)}
                             className="btn-primary mr-1"                            
                             >Edit</button>
-                            <button className="btn-secondary">Delete</button>
+                            <button 
+                            onClick={() => deleteCategory(category)}
+                            className="btn-secondary">Delete</button>
                         </td>
                     </tr>
                 ))}
@@ -91,3 +119,7 @@ export default function Categories(){
         </Layout>
     );
 }
+export default withSwal(({ swal }, ref) => (
+    <Categories swal={swal} />
+));
+    
