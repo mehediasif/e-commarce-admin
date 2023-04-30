@@ -9,7 +9,13 @@ export default function Navigation(){
     const router = useRouter();
     return(
         <aside className="text-white p-2">
-            <Link href={'/'} className="flex gap-1 mb-4">
+            <span className="flex gap-1 px-2 cursor-pointer bg-slate-500 text-black text-clip border-2 border-cyan-500 shadow-md shadow-cyan-400 hover:shadow-lg hover:shadow-blue-500 mb-2 items-center rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <p>Online Store</p>
+            </span>
+            <Link href={'/'} className="flex gap-1 mb-4 mt-4 pt-4 pb-2 border-b">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
             </svg>          
