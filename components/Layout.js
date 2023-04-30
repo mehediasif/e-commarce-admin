@@ -18,7 +18,7 @@ export default function Layout({children}) {
         <div className="bg-white flex-grow rounded-md p-2 m-2">
         {children}
         </div>
-        <button onClick={() => signOut('google')} className="p-2 bg-slate-400 hover:bg-slate-200 rounded-lg text-blue-500 hover:text-black">Sign out</button>
+        
       </div>
     )
   }
