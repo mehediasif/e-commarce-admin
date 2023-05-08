@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from 'react-hot-toast';
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -13,21 +13,31 @@ export default function ProductForm(
         description:existingDescription,
         price:existingPrice,
         productImages:existingProductImages,
+        category:assingedCategory,
     }
 )
 {
     const [title, setTitle] = useState(existingTitle || '');
     const [description, setDescription] = useState(existingDescription || '');
     const [price, setPrice] = useState(existingPrice || '');
+    const [category, setCategory] = useState(assingedCategory || '');
     const [productImages, setProductImages] = useState(existingProductImages || []);
     const [goBack, setGoBack] = useState(false);
     const [goBack1, setGoBack1] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
+    const [categories, setCategories] = useState([]);
+
     const router = useRouter();
+
+    useEffect(() => {
+      axios.get('/api/categories').then(res => {
+        setCategories(res.data);
+      })
+    }, [])
 
     async function saveProduct(e){
       e.preventDefault();
-      const data = {title,description,price,productImages};
+      const data = {title,description,price,productImages,category};
 
       //If Product exists update it or Create a new one
       if(_id) {
@@ -90,6 +100,15 @@ export default function ProductForm(
           value={title}
           onChange={e => setTitle(e.target.value)}
           />
+        <label>Categories</label><br />
+        <select 
+          value={category}
+          onChange={ev => setCategory(ev.target.value)}>
+          <option value="">Uncategorized</option>
+          {categories.length > 0 && (categories.map(cat => (
+            <option key={cat} value={cat._id}>{cat.name}</option>
+          )))}
+        </select>
         <label>Photos</label>
         <div className="mb-2 flex flex-wrap gap-2">
           <ReactSortable 
@@ -99,8 +118,8 @@ export default function ProductForm(
           {!!productImages?.length && productImages.map(item => (
             <div key={item} className="h-24 max-h-full">
               {// eslint-disable-next-line @next/next/no-img-element
-              }
               <img src={item} alt="" />
+            }
             </div>
           ))}
           </ReactSortable>

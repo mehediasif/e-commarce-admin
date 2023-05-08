@@ -8,6 +8,8 @@ function Categories({swal}){
     const [editingCategory, setEditingCategory] = useState(null);
     const [name,setName] = useState('');
     const [categoryName,setcategoryName] = useState([]);
+    const [propertyName,setPropertyName] = useState([]);
+
     const [parentCategoryName,setParentCategoryName] = useState('');
 
     useEffect(() => {
@@ -22,7 +24,14 @@ function Categories({swal}){
 
     async function saveCategory(ev){
         ev.preventDefault();
-        const data = {name,parentCategoryName}
+        const data = {
+            name,
+            parentCategoryName,
+            propertyName:propertyName.map(p => ({
+                name:p.name,
+                values:p.values.split(','),
+            })),
+        }
         if(editingCategory){
             data._id = editingCategory._id;
             await axios.put('/api/categories', data);
@@ -31,12 +40,20 @@ function Categories({swal}){
             await axios.post('/api/categories', data);
         }
         setName('');
+        setParentCategoryName('');
+        setPropertyName([]);
         fetchCategories();
     }
     function editCategory(category){
         setEditingCategory(category);
         setName(category.name);
         setParentCategoryName(category.parent?._id);
+        setPropertyName(
+            category.propertyName.map(({name,values}) => ({
+                name:name,
+                values:values.join(','),
+            }
+        )));
     }
 
     function deleteCategory(category){
@@ -62,21 +79,50 @@ function Categories({swal}){
             }
         });
     }
+
+    function addProperty(){
+        setPropertyName(prev => {
+            return [...prev, {name: '',values:''}];
+        });
+    }
+    function handlePropertyNameChange(index,propertyName,newName){
+        setPropertyName(prev => {
+            const propertyName = [...prev];
+            propertyName[index].name = newName;
+            return propertyName;
+        })
+    }
+    function handlePropertyValueChange(index,propertyName,newValue){
+        setPropertyName(prev => {
+            const propertyName = [...prev];
+            propertyName[index].values = newValue;
+            return propertyName;
+        });
+    }
+    function removeProperty(index){
+        setPropertyName(prev => {
+            return [...prev].filter((p,pIndex) => {
+                return pIndex !== index;
+            });
+        });
+    }
     return (
         <Layout>
             <h2>Categories</h2>
             <label>
                 {editingCategory ? `Editing Category '${editingCategory.name}'` : 'Create new category'}
             </label>
-            <form onSubmit={saveCategory} className="flex gap-1">
+            
+            <form onSubmit={saveCategory} >
+                <div className="flex gap-1">
                 <input 
-                    className="mb-0"
+                    className="mb-2"
                     type="text" 
                     placeholder="Category Name" 
                     onChange={ev => setName(ev.target.value)}
                     value={name}/>
                 <select 
-                className="mb-0"
+                className="mb-2"
                 onChange={ev => setParentCategoryName(ev.target.value)}
                 value={parentCategoryName}
                 >
@@ -86,9 +132,58 @@ function Categories({swal}){
                         <option value={category._id}>{category.name}</option>
                     ))}
                 </select>
-                <button type="submit" className="btn-primary py-1">Save</button>
+                </div>
+                <div>
+                    <label className="block">Properties</label>
+                    <button 
+                    onClick={addProperty}
+                    type="button"
+                    className="btn-default mb-2"
+                    >Add Property</button>
+                    {(propertyName.length > 0) && propertyName.map((property,index) => (
+                        // eslint-disable-next-line react/jsx-key
+                        <div className="flex gap-1 mb-2">
+                          <input
+                           type="text" 
+                           value={property.name} 
+                           className="mb-0"
+                           onChange={ev => handlePropertyNameChange(index,property,ev.target.value)}
+                           placeholder="name (example: color)" 
+                           />
+                          <input
+                           type="text" 
+                           value={property.values} 
+                           className="mb-0"
+                           onChange={ev => handlePropertyValueChange(index,property,ev.target.value)}
+                           placeholder="values, comma separated" 
+                           />
+                           <button 
+                           className="bg-red-600 opacity-90 text-white px-4 py-1 ml-2 rounded-xl"
+                           onClick={() => removeProperty(index)}
+                           type="button"
+                           >Remove</button>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex gap-1">
+                    {editingCategory && (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setEditingCategory(null);
+                                setParentCategoryName('');
+                                setName('');
+                                setPropertyName([]);
+
+                            }}
+                            className="btn-secondary"
+                            >Cancel</button>
+                    )}
+                    <button type="submit" className="btn-primary py-1">Save</button>
+                </div>
             </form>
-            <table className="basic mt-4">
+            {!editingCategory && (
+                <table className="basic mt-4">
                 <thead>
                     <tr>
                         <td>Category Name</td>
@@ -116,6 +211,8 @@ function Categories({swal}){
                 ))}
                 </tbody>
             </table>
+            )}
+            
         </Layout>
     );
 }
