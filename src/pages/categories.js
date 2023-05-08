@@ -133,13 +133,15 @@ function Categories({swal}){
                     ))}
                 </select>
                 </div>
-                <div>
+                <div className="ml-2">
                     <label className="block">Properties</label>
                     <button 
                     onClick={addProperty}
                     type="button"
                     className="btn-default mb-2"
-                    >Add Property</button>
+                    >Add Property
+                    </button>
+
                     {(propertyName.length > 0) && propertyName.map((property,index) => (
                         // eslint-disable-next-line react/jsx-key
                         <div className="flex gap-1 mb-2">
