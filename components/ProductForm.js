@@ -14,6 +14,7 @@ export default function ProductForm(
         price:existingPrice,
         productImages:existingProductImages,
         category:assingedCategory,
+        properties:assingedProperties,
     }
 )
 {
@@ -22,6 +23,7 @@ export default function ProductForm(
     const [price, setPrice] = useState(existingPrice || '');
     const [category, setCategory] = useState(assingedCategory || '');
     const [productImages, setProductImages] = useState(existingProductImages || []);
+    const [productProperties, setProductProperties] = useState(assingedProperties || {});
     const [goBack, setGoBack] = useState(false);
     const [goBack1, setGoBack1] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
@@ -37,7 +39,7 @@ export default function ProductForm(
 
     async function saveProduct(e){
       e.preventDefault();
-      const data = {title,description,price,productImages,category};
+      const data = {title,description,price,productImages,category,properties:productProperties};
 
       //If Product exists update it or Create a new one
       if(_id) {
@@ -91,6 +93,14 @@ export default function ProductForm(
       setProductImages(productImages);
     }
 
+    function changeProductProperties(propName, value){
+      setProductProperties(prev => {
+        const newProductProperties = {...prev};
+        newProductProperties[propName] = value;
+        return newProductProperties;
+      });
+    }
+
     const propertiesToFill = [];
     if (categories.length > 0 && category){
 
@@ -113,17 +123,36 @@ export default function ProductForm(
           onChange={e => setTitle(e.target.value)}
           />
         <label>Categories</label><br />
-        <select 
+        <select
+          className="bg-slate-200" 
           value={category}
           onChange={ev => setCategory(ev.target.value)}>
           <option value="">Uncategorized</option>
           {categories.length > 0 && (categories.map(cat => (
-            <option key={cat} value={cat._id}>{cat.name}</option>
+            <option 
+            key={cat} 
+            value={cat._id}
+            >{cat.name}</option>
           )))}
         </select>
+        <label>Properties</label>
+
         {propertiesToFill.length > 0 && propertiesToFill.map(p => (
           // eslint-disable-next-line react/jsx-key
-          <div>{p.name}</div>
+          <div className="grid grid-cols-2 gap-2">
+            
+            <div className="bg-gradient-to-r from-green-400 to-blue-400 rounded-md mb-2">{p.name}</div>
+            <select
+              value={productProperties[p.name]} 
+              onChange={(ev) => changeProductProperties(p.name,ev.target.value)}
+              className="bg-gradient-to-r from-gray-300 to-gray-400 hover:border-red-700"
+              >
+              {p.values.map(value => (
+                <option key={p.name} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+
         ))}
         <label>Photos</label>
         <div className="mb-2 flex flex-wrap gap-2">
