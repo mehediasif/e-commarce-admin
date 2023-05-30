@@ -34,6 +34,7 @@ export default NextAuth(authOptions);
 export async function isRequestFromAdmin(req,res){
   const session = await getServerSession(req,res, authOptions);
   if(!adminEmails.includes(session?.user?.email)){
-    throw 'Access Denied';
+    res.status(401);
+    res.end();
   }
 }

@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { mongooseConnect } from "../../../lib/mongoose";
 import { Product } from "../../../models/Product";
 import { isRequestFromAdmin } from "./auth/[...nextauth]";
