@@ -7,7 +7,7 @@ img{
     border-radius: 0.5rem;
 }
 input, textarea, select{
-    @apply border-2 border-gray-400 rounded-md px-1 w-full;
+    @apply border-2 border-gray-400 bg-white rounded-md px-1 py-2 w-full;
     @apply mb-2;
     @apply font-extralight;
 }
@@ -22,29 +22,29 @@ h3{
 }
 label{
     @apply font-mono;
-    @apply text-cyan-700;
+    @apply text-blue-400 mb-2;
 }
 .btn-primary{
     @apply bg-cyan-800 text-white px-4 py-1 rounded-md;
 }
 .btn-default{
-    @apply bg-slate-400 text-white px-2 py-1 rounded-md;
+    @apply bg-blue-400 text-white px-2 py-1 rounded-md;
 }
 .btn-secondary{
     @apply bg-red-500 text-white px-4 py-1 mr-2 rounded-md;
 }
 
 table.basic {
-    @apply w-full mt-4;
+    @apply w-full mt-4 bg-white shadow-md rounded-md;
 }
 
 table.basic thead tr td {
-    @apply bg-slate-500 text-center text-white;
+    @apply bg-slate-600 text-center text-white text-sm uppercase;
 }
 
 table.basic tr td {
-    @apply border-2 bg-slate-200 border-cyan-700 p-2;
+    @apply px-4 py-2 border-2 bg-blue-300/50 hover:bg-blue-300/60 border-x-primary/50 border-y-primary/60;
 }
 table.basic a {
-    @apply bg-green-500 opacity-90 text-white text-sm rounded-md py-1 px-2 inline-flex gap-1 mr-1;
+    @apply bg-blue-600 opacity-90 text-white text-sm rounded-md py-1 px-2 inline-flex gap-1 mr-1;
 }
