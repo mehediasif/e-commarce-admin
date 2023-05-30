@@ -7,6 +7,10 @@ export default function Navigation(){
     const inactiveNav = "flex mt-2 gap-1 p-1";
     const activeNav = "flex mt-2 gap-1 p-1 bg-gray-50 text-cyan-700 rounded-l-md";
     const router = useRouter();
+    async function logOut(){
+        await router.push('/');
+        await signOut('google');
+    }
     return(
         <aside className="text-white p-2">
             <span className="flex gap-1 px-2 cursor-pointer bg-slate-500 text-black text-clip border-2 border-cyan-500 shadow-md shadow-cyan-400 hover:shadow-lg hover:shadow-blue-500 mb-2 items-center rounded-lg">
@@ -58,9 +62,9 @@ export default function Navigation(){
                 </svg>
                 <span className="">Settings</span>
                 </Link>
-                <button onClick={() => signOut('google')} className={inactiveNav}>
+                <button onClick={logOut} className={inactiveNav}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
                 </svg>
                 Sign out
                 </button>
