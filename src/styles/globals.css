@@ -37,6 +37,9 @@ label{
 .btn-secondary{
     @apply bg-red-500 text-white px-4 py-1 mr-2 rounded-md;
 }
+.btn-green{
+    @apply bg-emerald-600 text-white px-4 py-1 mr-2 rounded-md;
+}
 
 table.basic {
     @apply w-11/12 max-h-screen mt-4 bg-white shadow-md overscroll-contain;
@@ -51,7 +54,7 @@ table.basic thead tr th {
 table.basic thead tr td,
 table.basic thead tr th
 {
-    @apply bg-gradient-to-r from-slate-600 via-gray-600 to-gray-400 text-center text-white uppercase font-[helvatica] font-medium my-4 py-2;
+    @apply bg-gradient-to-r from-slate-700 via-gray-700 to-gray-600 text-center text-white uppercase font-[helvatica] font-medium my-4 py-2;
 }
 
 table.basic tr td {

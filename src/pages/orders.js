@@ -14,7 +14,7 @@ export default function Orders() {
   return(
     <Layout>
     <h2>Orders</h2>
-    <h1>Hellow World</h1>
+    <h1>Check Out how Rich you have become!</h1>
     
       <table className="basic">
         <thead>
@@ -25,6 +25,8 @@ export default function Orders() {
             <th>Address</th>
             <th>Region</th>
             <th>Order Info</th>
+            <th>Payment Status</th>
+
           </tr>
         </thead>
         <tbody>
@@ -39,8 +41,8 @@ export default function Orders() {
             </td>
             <td>
               <>
-                <table className="basiC">
-                  <thead className="font-[Monaco]">
+                <table className="w-full px-2 mx-2 font-[Monaco] bg-blue-500 uppercase">
+                  <thead >
                     <tr>
                       <th>Product</th>
                       <th>Quantity</th>
@@ -61,6 +63,16 @@ export default function Orders() {
                 </table>
               </>
             </td>
+            
+            {order.paid ?
+               (<td>
+              <button className="btn-green" disabled>Yes</button>
+              </td>) : 
+              (<td>
+                <button className="btn-secondary" disabled>No</button>
+                </td>)
+              }
+            
           </tr>
         ))}
         </tbody>
