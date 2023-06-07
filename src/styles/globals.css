@@ -14,8 +14,12 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
     @apply border-emerald-700;
 }
+h1{
+    @apply bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text;
+}
 h2{
-    @apply text-emerald-800 mb-4 text-center text-lg font-mono;
+    @apply text-gray-700 text-center text-lg font-serif border border-gray-800 shadow-md rounded-xl;
+    @apply sm:px-20 sm:mx-20 md:px-28 md:mx-28 lg:px-40 lg:mx-40 xl:px-72 xl:mx-60;
 }
 h3{
     @apply text-orange-600 mb-2 text-center text-base font-medium;
@@ -35,15 +39,23 @@ label{
 }
 
 table.basic {
-    @apply w-11/12 mt-4 bg-white shadow-md rounded-md;
+    @apply w-11/12 max-h-screen mt-4 bg-white shadow-md overscroll-contain;
 }
-
-table.basic thead tr td {
-    @apply bg-slate-600 text-center text-white text-sm uppercase;
+table.basiC {
+    @apply w-full bg-white shadow-md;
+}
+table.basiC thead tr td,
+table.basic thead tr th {
+    @apply bg-blue-500 text-center text-black uppercase font-[Times];
+}
+table.basic thead tr td,
+table.basic thead tr th
+{
+    @apply bg-gradient-to-r from-slate-600 via-gray-600 to-gray-400 text-center text-white uppercase font-[helvatica] font-medium my-4 py-2;
 }
 
 table.basic tr td {
-    @apply px-4 py-2 border-2 bg-blue-300/50 border-x-primary/50 border-y-primary/60;
+    @apply px-4 py-2 border-2 bg-gray-300 border-x-blue-400/50 border-y-blue-900/60;
 }
 table.basic a {
     @apply bg-blue-600 opacity-90 text-white text-sm rounded-md py-1 px-2 inline-flex gap-1 mr-1;

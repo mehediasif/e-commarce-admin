@@ -17,7 +17,7 @@ export default function Layout({children}) {
       );
     }
     return (
-      <div className="bg-slate-600 min-h-screen min-w-screen">
+      <div className="bg-gray-300 min-h-screen min-w-screen">
         <div className="flex justify-between flex-row-reverse md:hidden">
         <div className="block">
           <button onClick={() => setShowNav(true)}>

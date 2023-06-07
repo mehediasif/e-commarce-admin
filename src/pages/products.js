@@ -13,13 +13,14 @@ export default function Products() {
   }, []);
   return(
     <Layout>
+      <h2>All Inventory Products</h2>
       <Link className="bg-blue-500 text-black rounded-md py-1 px-2" href={'/products/new'}>Add New Product</Link>
 
       <table className="basic">
         <thead>
           <tr>
-            <td>Product Name</td>
-            <td>Controls</td>
+            <th>Product Name</th>
+            <th>Controls</th>
           </tr>
         </thead>
         <tbody>

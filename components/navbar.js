@@ -6,16 +6,17 @@ import Logo from "./Logo";
 
 export default function Navigation({show}){
     const inactiveNav = "flex mt-2 gap-1 p-1 ";
-    const activeNav = "flex mt-2 p-1 bg-gray-500/70 text-primary rounded-md -skew-y-1";
+    const activeNav = "flex mt-2 p-1 bg-gray-500/70 text-primary rounded-md";
     const inactiveIcon = "w-6 h-6";
     const activeIcon = "w-8 h-8 text-primary"
     const router = useRouter();
+
     async function logOut(){
         await router.push('/');
         await signOut('google');
     }
     return(
-        <aside className={(show ? "left-0" : "-left-full") + " top-0 text-white p-4 fixed bg-slate-600 w-full h-full lg:static lg:w-auto md:state md:w-auto transition-all"}>
+        <aside className={(show ? "left-0" : "-left-full") + " top-0 text-white p-4 fixed bg-gray-700 w-full h-screen lg:static lg:w-auto md:state md:w-auto transition-all"}>
             <div className="mb-4 mr-4">
             <Logo />
             </div>
